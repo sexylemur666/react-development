@@ -30,7 +30,6 @@ function decreOne(count, idx) {
 }
 
 function toggle(arr, idx) {
-  console.log(arr, idx, arr.map((val, i) => (i == idx ? !val : val)));
   return arr.map((val, i) => (i == idx ? !val : val));
 }
 
