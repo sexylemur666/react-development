@@ -71,7 +71,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Jamie's Bakery</h1>
+      <h1>Lemur's Bakery</h1>
       <div className="container">
         <div className="menu">
           {
