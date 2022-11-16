@@ -1,38 +1,176 @@
+/* Add styling for your page here */
+
 .App {
-  text-align: center;
+    width: 90%;
+    max-width: 1440px;
+    margin-top: 25px;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+div.container {
+    max-width: none;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+div.side {
+    margin-left: 20px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+div.side-group {
+    padding-left: 10px;
+    padding-right: 0;
+    padding-top: 10px;
+    padding-bottom: 7px;
+    min-width: 300px;
+    margin: 0;
 }
 
-.App-link {
-  color: #61dafb;
+div#cart.side-group {
+    padding: 20px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgb(214, 214, 214);
+    border-radius: 8px;
+    margin-bottom: 25px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+Button.clear-button {
+    margin-bottom: 20px;
+    border-radius: 16px;
+}
+
+div.cart-title {
+    display: flex;
+    justify-content: space-between;
+    /* align-items: center; */
+}
+
+/* .BakeryItem {
+} */
+
+div.menu {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    row-gap: 40px;
+    column-gap: 50px;
+}
+
+div.item-wrapper {
+    position: relative;
+    background-color: rgb(250, 250, 250);
+    max-width: 300px;
+    height: 420px;
+}
+
+div.item {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+div.icon-dec {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+div.icon-inc {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+/* div.item:hover {
+    background-color: rgb(240, 240, 240);
+    cursor: pointer;
+} */
+
+div.item-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    padding: 20px;
+}
+
+h1, h2 {
+    line-height: 1.75rem;
+}
+p {
+    line-height: 1.35rem;
+}
+h1, h2, p {
+    margin: 0;
+}
+
+h2.item-h2 {
+    font-size: 1.25rem;
+    margin: 0;
+    padding: 0;
+}
+
+p.item-desc {
+    margin: 0;
+    padding: 0;
+}
+
+img.item-image {
+    width: 100%;
+}
+
+li.cart-item {
+    list-style: none;
+    padding-bottom: 10px;
+}
+
+ul.cart-list {
+    padding: 0;
+}
+
+p.total {
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+button.item-button-dec, button.item-button-inc {
+    border: none;
+    padding: 0;
+    width: 50%;
+    height: 100%;
+
+    position: absolute;
+    top: 0;
+    background: rgba(0,0,0,0);
+
+    cursor: pointer;
+}
+button.item-button-dec {
+    left: 0;
+}
+button.item-button-inc {
+    right: 0;
+}
+button.item-button-dec:hover {
+    background: rgba(255, 100, 100, 0.25);
+}
+button.item-button-inc:hover {
+    background: rgba(110, 255, 110, 0.25);
+}
+
+span.item-price {
+    font-size: 1.35rem;
+}
+
+span.cart-item-count {
+    float: right;
 }
