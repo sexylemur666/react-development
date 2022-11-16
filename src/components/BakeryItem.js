@@ -1,6 +1,6 @@
 import {FILTER_LABELS} from "../App.js"
 
-// A component that displays a single bakery item
+/* A component that displays a single bakery item */
 export default function BakeryItem(props) {
     const item = props.item;
     const count = props.count;

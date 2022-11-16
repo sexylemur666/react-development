@@ -7,20 +7,22 @@ import Button from 'react-bootstrap/Button';
 import bakeryData from "./assets/bakery-data.json";
 import BakeryItem from "./components/BakeryItem.js";
 
+
+/* Constants */
 const ZERO_COUNT = new Array(bakeryData.length).fill(0);
 const FILTER_LABELS = ["Delicious!", "Toothsome!", "Luscious!"];
 const SORTBY_LABELS = ["Popular", "Price"];
 
 
-/* ################ Preprocess all bakery items ################ */
+/* Preprocess all bakery items */
 bakeryData.forEach((item, index) => {
   item.image = process.env.PUBLIC_URL + "/" + item.image;
   item.index = index;
   item.hash = hash(item);
 });
-/* ############################################################## */
 
 
+/* Utility functions */
 function increOne(count, idx) {
   return count.map((c, i) => (i == idx ? c + 1 : c));
 }
@@ -56,6 +58,8 @@ function twoDecimal(x) {
   return (Math.round(x * 100) / 100).toFixed(2);
 }
 
+
+/* Main app */
 function App() {
   const [count, setCount] = useState(ZERO_COUNT);
   const [filterStates, setFilterStates] = useState(new Array(FILTER_LABELS.length).fill(true))
@@ -136,7 +140,7 @@ function App() {
                   <Form.Check
                   type="radio"
                   name="sortby-option"
-                  id={index}
+                  id={`sortby_${label}`}
                   label={label}
                   defaultChecked={index == 0}
                   onClick={ () => setSortByOption(index) }
@@ -159,7 +163,7 @@ function App() {
                   <Form.Check
                   type="checkbox"
                   name="checkbox-option"
-                  id={index}
+                  id={`filter_${label}`}
                   label={label}
                   defaultChecked={true}
                   onClick={ () => setFilterStates(toggle(filterStates, index)) }
@@ -177,5 +181,6 @@ function App() {
   );
 }
 
+/* Exports */
 export default App;
 export {FILTER_LABELS};
