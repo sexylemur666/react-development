@@ -7,10 +7,16 @@ import Button from 'react-bootstrap/Button';
 import bakeryData from "./assets/bakery-data.json";
 import BakeryItem from "./components/BakeryItem.js";
 
+const ZERO_COUNT = new Array(bakeryData.length).fill(0);
+const FILTER_LABELS = ["Delicious!", "Toothsome!", "Luscious!"];
+const SORTBY_LABELS = ["Popular", "Price"];
 
-/* ####### DO NOT TOUCH -- this makes the image URLs work ####### */
-bakeryData.forEach((item) => {
+
+/* ################ Preprocess all bakery items ################ */
+bakeryData.forEach((item, index) => {
   item.image = process.env.PUBLIC_URL + "/" + item.image;
+  item.index = index;
+  item.hash = hash(item);
 });
 /* ############################################################## */
 
@@ -28,12 +34,17 @@ function toggle(arr, idx) {
   return arr.map((val, i) => (i == idx ? !val : val));
 }
 
+function hash(item) {
+  return item.name.split('').reduce(
+    (pSum, c) => (pSum + c.charCodeAt(0) ^ 12345), 0) >> 3;
+}
+
 function filterAndSortItems(filters, sortBy) {
   const filtered = bakeryData.filter(
-    (item, i) => {
+    (item) => {
       return (
         filters.filter(
-          (fOn, fi) => fOn && (i % filters.length == fi)
+          (fOn, fi) => fOn && (item.hash % filters.length == fi)
         ).length > 0
       );
     }
@@ -42,24 +53,14 @@ function filterAndSortItems(filters, sortBy) {
                      : filtered.sort((x, y) => x.price - y.price);
 }
 
-
 function twoDecimal(x) {
   return (Math.round(x * 100) / 100).toFixed(2);
 }
 
-
 function App() {
-  // TODO: use useState to create a state variable to hold the state of the cart
-  /* add your cart state code here */
-  const ZERO_COUNT = new Array(bakeryData.length).fill(0);
   const [count, setCount] = useState(ZERO_COUNT);
-  
-  const FILTER_LABELS = ["Delicious!", "Toothsome!", "Luscious!"];
   const [filterStates, setFilterStates] = useState(new Array(FILTER_LABELS.length).fill(true))
-
-  const SORTBY_LABELS = ["Popular", "Price"];
   const [sortByOption, setSortByOption] = useState(0);
-  
   const [displayItems, setDisplayItems] = useState(bakeryData);
 
 
@@ -76,13 +77,13 @@ function App() {
         <div className="menu">
           {
             displayItems.map(
-              (item, index) => ( // TODO: map bakeryData to BakeryItem components
+              (item) => ( // map bakeryData to BakeryItem components
                   <div className="item-wrapper">
-                    <BakeryItem item={item} count={count[index]}></BakeryItem>
-                    <button className="item-button-dec" onClick={() => setCount(decreOne(count, index))} >
+                    <BakeryItem item={item} count={count[item.index]}></BakeryItem>
+                    <button className="item-button-dec" onClick={() => setCount(decreOne(count, item.index))} >
                       <div className="icon-dec"><img src="icons/remove.svg"></img></div>
                     </button>
-                    <button className="item-button-inc" onClick={() => setCount(increOne(count, index))} >
+                    <button className="item-button-inc" onClick={() => setCount(increOne(count, item.index))} >
                       <div className="icon-inc"><img src="icons/add.svg"></img></div>
                     </button>
                   </div>
@@ -139,7 +140,7 @@ function App() {
                   id={index}
                   label={label}
                   defaultChecked={index == 0}
-                  onClick={ () => {setSortByOption(index);} }
+                  onClick={ () => setSortByOption(index) }
                   />
                 )
               )
@@ -162,7 +163,7 @@ function App() {
                   id={index}
                   label={label}
                   defaultChecked={true}
-                  onClick={ () => {setFilterStates(toggle(filterStates, index));} }
+                  onClick={ () => setFilterStates(toggle(filterStates, index)) }
                   />
                 )
               )
@@ -173,11 +174,9 @@ function App() {
         </div>
       </div>
 
-
-
-
     </div>
   );
 }
 
 export default App;
+export {FILTER_LABELS};

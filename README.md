@@ -1,9 +1,11 @@
 # Development
 
 ### Link to Deployed Website
-If you used the stencil code, this is `https://<your GitHub username>.github.io/<name of your repository>`
+https://sexylemur666.github.io/react-development/
 
 ### Goal and Value of the Application
+
+This is an application
 
 ### Usability Principles Considered
 
